@@ -25,7 +25,7 @@ public class userTankBody extends SuperSmoothMover {
         tankSound = new GreenfootSound[2];
         for (int i = 0; i < 2; i++) {
             tankSound[i] = new GreenfootSound("tankDriving.wav");
-            tankSound[i].setVolume(75);
+            tankSound[i].setVolume(50);
         }
     }
     

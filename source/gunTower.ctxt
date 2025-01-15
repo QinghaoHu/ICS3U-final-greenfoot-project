@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=gunTower
+comment0.text=\n\ Write\ a\ description\ of\ class\ gunTower\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=body
+comment1.target=gunTower(userTankBody)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=angle
+comment3.target=void\ shootProjectile(int)
+numComments=4

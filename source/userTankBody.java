@@ -17,6 +17,19 @@ public class userTankBody extends SuperSmoothMover {
     }
     
     public void act(){
+        if (Greenfoot.isKeyDown("w")) {
+            move(2); // Move forward
+        } else if (Greenfoot.isKeyDown("s")) {
+            move(-2); // Move backward
+        }
+
+        // Rotate the tank body with left/right arrow keys (optional)
+        if (Greenfoot.isKeyDown("a")) {
+            turn(-2); // Rotate counter-clockwise
+        } else if (Greenfoot.isKeyDown("d")) {
+            turn(2); // Rotate clockwise
+        }
+        
         if (Greenfoot.isKeyDown("up")) {
             move(2); // Move forward
         } else if (Greenfoot.isKeyDown("down")) {

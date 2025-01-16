@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class userTankBody extends SuperSmoothMover {
+public class UserTankBody extends SuperSmoothMover {
     /**
      * Act - do whatever the userTank wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -17,10 +17,10 @@ public class userTankBody extends SuperSmoothMover {
     
     private GreenfootSound[] tankSound;
     
-    public userTankBody() {
+    public UserTankBody() {
         setImage("userTankBody.png");
         getImage().rotate(90);
-        hp = 1000;
+        hp = 1500;
         tankSoundIndex = 0;
         tankSound = new GreenfootSound[2];
         for (int i = 0; i < 2; i++) {
@@ -33,8 +33,11 @@ public class userTankBody extends SuperSmoothMover {
         checkKey();
     }
     
-    public void checkKey() {
+    private void checkKey() {
         boolean isMove = false;
+        int originalLocationX = getX(), originalLocationY = getY();
+        int originalAngle = getRotation();
+        
         if (Greenfoot.isKeyDown("w")) {
             move(2); // Move forward
             isMove = true;
@@ -68,12 +71,30 @@ public class userTankBody extends SuperSmoothMover {
             isMove = true;
         }
         
+        EnemyTankBody enemyTank = (EnemyTankBody)getOneIntersectingObject(EnemyTankBody.class);
+        if (enemyTank != null) {
+            // Reset position and rotation if a collision occurs
+            setLocation(originalLocationX, originalLocationY);
+            setRotation(originalAngle);
+            isMove = false; // Stop moving
+        }
+        
         if (isMove) {
             playSound();
         }
     }
     
-    public void playSound() {
+    public int getHP() {
+        return hp; 
+    }
+    
+    public void damageMe() {
+        int damage = Greenfoot.getRandomNumber(100) + 400;
+        hp -= damage;
+        // End the game if HP = 0
+    }
+    
+    private void playSound() {
         tankSound[tankSoundIndex % 2].play();
         tankSoundIndex++;
     }

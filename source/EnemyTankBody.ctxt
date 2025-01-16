@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=EnemyTankBody
+comment0.text=\n\ Write\ a\ description\ of\ class\ enemyTankBody\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=EnemyTankBody()
+comment2.params=gunTower
+comment2.target=void\ setGunTower(EnemyGunTower)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ getDamage()
+numComments=5

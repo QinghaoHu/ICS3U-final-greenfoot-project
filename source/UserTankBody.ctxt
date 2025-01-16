@@ -1,12 +1,16 @@
 #BlueJ class context
-comment0.target=userTankBody
+comment0.target=UserTankBody
 comment0.text=\n\ Write\ a\ description\ of\ class\ userTank\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=userTankBody()
+comment1.target=UserTankBody()
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ checkKey()
 comment4.params=
-comment4.target=void\ playSound()
-numComments=5
+comment4.target=int\ getHP()
+comment5.params=
+comment5.target=void\ damageMe()
+comment6.params=
+comment6.target=void\ playSound()
+numComments=7

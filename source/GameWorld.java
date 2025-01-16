@@ -16,6 +16,7 @@ public class GameWorld extends World
     private static int score = 0;
     private int frames;
     private long lastTime = System.currentTimeMillis();
+    private int spawnTimer;
     
     /**
      * Constructor for objects of class gameWorld.
@@ -35,6 +36,8 @@ public class GameWorld extends World
         
         score = 0;
         
+        spawnTimer = 0;
+        
         scoreCounter = new Counter ("Points: ");
         hpCounter = new Counter ("Life: ");
         armorCounter = new Counter ("Bomb: ");
@@ -52,7 +55,8 @@ public class GameWorld extends World
         
         countFPS();
         
-        int spawnOption = Greenfoot.getRandomNumber(100);
+        
+        int spawnOption = Greenfoot.getRandomNumber(300);
         if (spawnOption == 0) {
             createEnemyTank();
         }

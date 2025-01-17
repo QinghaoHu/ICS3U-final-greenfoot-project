@@ -19,7 +19,7 @@ public class GunTower extends SuperSmoothMover
         setImage("gunTower.png"); // Set the gun tower image
         getImage().rotate(90);
         armor = 30;
-        maxCoolDown = 90;
+        maxCoolDown = 50;
         coolDown = 80;
         coolDownBar = new SuperStatBar (maxCoolDown, coolDown, this, 40, 8, -32, Color.BLUE, Color.RED, true, Color.GRAY, 1); 
     }

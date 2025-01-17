@@ -32,7 +32,7 @@ public class EnemyGunTower extends SuperSmoothMover
         }
         setRotation(angle + randomFactor - 10);
         cooldown++;
-        if (cooldown == 300) {
+        if (cooldown >= 400 + Greenfoot.getRandomNumber(200)) {
             enemyShoot();
             cooldown = 0;
         }

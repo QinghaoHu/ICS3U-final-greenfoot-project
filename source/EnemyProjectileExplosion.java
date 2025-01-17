@@ -29,7 +29,7 @@ public class EnemyProjectileExplosion extends Actor
 
     private void updateImage() {
         GreenfootImage image = new GreenfootImage(size, size);
-        image.setColor(new Color(173, 216, 230, transparency)); // Explosion color (red-orange)
+        image.setColor(new Color(204, 0, 0, transparency)); // Explosion color (red-orange)
         image.fillOval(0, 0, size, size); // Draw a filled circle
         setImage(image);
     }

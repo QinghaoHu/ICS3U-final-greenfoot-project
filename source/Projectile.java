@@ -46,7 +46,7 @@ public class Projectile extends SuperSmoothMover
      */
     public void act() {
         // Move the projectile
-        move(35);
+        move(55);
 
         // Add a trail piece at the current location
         getWorld().addObject(new TrailPiece(getImage(), 20, angle), getX(), getY());

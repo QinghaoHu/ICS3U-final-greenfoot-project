@@ -18,6 +18,7 @@ public class GameWorld extends World
     private long lastTime = System.currentTimeMillis();
     private Health health;
     private Armor armor;
+    private static int enemySpawnRate;
     
     private int enemyTankSpawnCoolDown, healthSpawnCoolDown, armorSpawnCoolDown;
     
@@ -29,6 +30,8 @@ public class GameWorld extends World
     {
         super(1000, 750, 1);
         
+        Greenfoot.setSpeed(50);
+        
         setPaintOrder(Counter.class,  EnemyGunTower.class, EnemyTankBody.class);
         
         userTankBody = new UserTankBody();
@@ -36,6 +39,8 @@ public class GameWorld extends World
         
         gunTower = new GunTower(userTankBody);
         addObject(gunTower, 300, 200);
+        
+        userTankBody.setGunTower(gunTower);
         
         score = 0;
         
@@ -51,6 +56,7 @@ public class GameWorld extends World
         enemyTankSpawnCoolDown = 1;
         healthSpawnCoolDown = 1;
         armorSpawnCoolDown = 1;
+        enemySpawnRate = 150;
         
         frames = 0;
     }
@@ -67,7 +73,7 @@ public class GameWorld extends World
         
         if (enemyTankSpawnCoolDown == 0) {
             createEnemyTank();
-            enemyTankSpawnCoolDown = 120 + Greenfoot.getRandomNumber(150);
+            enemyTankSpawnCoolDown = enemySpawnRate + Greenfoot.getRandomNumber(120);
         }
         
         if (healthSpawnCoolDown == 0) {
@@ -98,12 +104,15 @@ public class GameWorld extends World
     
     public static void addPoints() {
         score++;
+        if (enemySpawnRate > 80) {
+            enemySpawnRate--;
+        }
     }
     
     private void createEnemyTank() {
         int y = Greenfoot.getRandomNumber(750);
         enemyTankBody = new EnemyTankBody();
-        addObject(enemyTankBody, 700, y);
+        addObject(enemyTankBody, 1000, y);
         enemyTankBody.addedToWorld(this);
         enemyGunTower = new EnemyGunTower(enemyTankBody, gunTower);
         addObject(enemyGunTower, 700, y);

@@ -13,17 +13,19 @@ public class EnemyProjectile extends SuperSmoothMover
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int angle;
+    private static final Color niceRed = new Color (204, 0, 0);
+    private static final Color niceYellow = new Color (255, 215, 0);
     
     public EnemyProjectile(int angle) {
     // Create an image of size 16x16 for the projectile
         GreenfootImage image = new GreenfootImage(16, 16);
         
         // Draw the bullet body (main rectangle)
-        image.setColor(Color.YELLOW); // Set the color for the rectangle
+        image.setColor(niceYellow); // Set the color for the rectangle
         image.fillRect(6, 10, 4, 6); // Rectangle dimensions (x, y, width, height)
         
         // Draw triangular tip of the bullet
-        image.setColor(Color.RED); // Set the color for the triangle
+        image.setColor(niceRed); // Set the color for the triangle
         int[] xPoints = {6, 10, 8}; // X-coordinates of triangle vertices
         int[] yPoints = {10, 10, 6}; // Y-coordinates of triangle vertices
         image.fillPolygon(xPoints, yPoints, 3); // Draw the triangle
@@ -41,7 +43,7 @@ public class EnemyProjectile extends SuperSmoothMover
      */
     public void act() {
         // Move the projectile
-        move(25);
+        move(15);
 
         // Add a trail piece at the current location
         getWorld().addObject(new TrailPiece(getImage(), 30, angle), getX(), getY());

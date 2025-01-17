@@ -14,6 +14,7 @@ public class UserTankBody extends SuperSmoothMover {
     private int hp;
     private int movingSpeed;
     private int tankSoundIndex;
+    private GunTower gunTower;
     
     private GreenfootSound[] tankSound;
     
@@ -79,9 +80,26 @@ public class UserTankBody extends SuperSmoothMover {
             isMove = false; // Stop moving
         }
         
+        Health health = (Health)getOneIntersectingObject(Health.class);
+        if (health != null) {
+            // Reset position and rotation if a collision occurs
+            this.addHP(health.hpIncrease());
+            health.used();
+        }
+        
+        Armor armor = (Armor)getOneIntersectingObject(Armor.class);
+        if (armor != null) {
+            gunTower.addArmor(armor.armorIncreaes());
+            armor.used();
+        }
+        
         if (isMove) {
             playSound();
         }
+    }
+    
+    public void setGunTower(GunTower gunTower) {
+        this.gunTower = gunTower;
     }
     
     public int getHP() {
@@ -91,6 +109,14 @@ public class UserTankBody extends SuperSmoothMover {
     public void addHP(int x) {
         hp += x;
         if (hp > 3500) hp = 3500;
+    }
+    
+    public int getXc() {
+        return getX();
+    }
+    
+    public int getYc() {
+        return getY();
     }
     
     public void damageMe() {

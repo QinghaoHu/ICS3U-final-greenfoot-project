@@ -16,6 +16,7 @@ public class EnemyTankBody extends SuperSmoothMover
     private int rotateDegree, hp, maxHP;
     private EnemyGunTower gunTower;
     private SuperStatBar hpBar;
+    private int willMove;
     
     public EnemyTankBody() {
         setImage("enemyTankBody.png");
@@ -25,6 +26,7 @@ public class EnemyTankBody extends SuperSmoothMover
         rotateDegree = 0;
         hp = 600;
         maxHP = 600;
+        willMove = 0;
         hpBar = new SuperStatBar (maxHP, hp, this, 40, 8, -32, Color.GREEN, Color.RED, true, Color.YELLOW, 1);
     }
     
@@ -41,6 +43,12 @@ public class EnemyTankBody extends SuperSmoothMover
         int originalLocationX = getX(), originalLocationY = getY();
         int originalAngle = getRotation();
         
+        if (willMove < 6) {
+            move(1);
+            willMove++;
+            return;
+        }
+        
         hpBar.update(hp);
         
         if (isOnRotate) {
@@ -51,9 +59,9 @@ public class EnemyTankBody extends SuperSmoothMover
                 rotateDegree = 0;
             }
         } else {
-        move(1);
             int x = Greenfoot.getRandomNumber(4);
             int y = (int)Greenfoot.getRandomNumber(120);
+            move(1);
             if (y == 1) {
                 x -= 2;
                 turn(x);

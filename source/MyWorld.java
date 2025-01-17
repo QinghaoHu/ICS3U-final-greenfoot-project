@@ -20,6 +20,7 @@ public class MyWorld extends World
     }
     
     public void act() {
-        Greenfoot.setWorld(new GameWorld());    
+        Greenfoot.setWorld(new WelcomeWorld());
+        //Greenfoot.setWorld(new GameWorld());    
     }
 }

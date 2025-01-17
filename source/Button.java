@@ -1,16 +1,31 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Button here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Button extends Actor
 {
+    private GreenfootImage image;
+    private GreenfootImage image2;
+    private GreenfootImage image3;
+    private String text;
+
+    private static final Color niceRed = new Color (204, 0, 0);
+    private static final Color niceYellow = new Color (255, 246, 144);
     
-    public void act()
-    {
-        // Add your action code here.
+    private static final Font buttonFont = new Font("Comic Sans MS", true, false, 36);
+
+    
+    public Button (String text) {
+        this.text = text;
+        drawButton (text);
     }
+
+    private void drawButton (String text){
+        image = new GreenfootImage(300, 50);
+        image.setColor(niceYellow);
+        image.fill();
+        image.setColor(niceRed);
+        image.setFont(buttonFont);
+        image.drawString (text, 24, 40);
+        setImage(image);
+    }
+
 }

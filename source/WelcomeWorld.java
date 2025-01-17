@@ -18,7 +18,7 @@ public class WelcomeWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 750, 1); 
-        startButton = new Button("Fight for the mother land");
-        addObject(startButton, 400, 550);
+        startButton = new Button("     Start");
+        addObject(startButton, 500, 550);
     }
 }

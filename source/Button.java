@@ -8,7 +8,7 @@ public class Button extends Actor
     private String text;
 
     private static final Color niceRed = new Color (204, 0, 0);
-    private static final Color niceYellow = new Color (255, 246, 144);
+    private static final Color niceYellow = new Color (255, 215, 0);
     
     private static final Font buttonFont = new Font("Comic Sans MS", true, false, 36);
 

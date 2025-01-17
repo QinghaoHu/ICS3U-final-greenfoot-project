@@ -49,6 +49,8 @@ public class EnemyProjectile extends SuperSmoothMover
         UserTankBody userTank = (UserTankBody)getOneIntersectingObject(UserTankBody.class);
         if (userTank != null) {
             userTank.damageMe();
+            EnemyProjectileExplosion explosion = new EnemyProjectileExplosion();
+            getWorld().addObject(explosion, getX(), getY());
             getWorld().removeObject(this);
             return;
         }

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Armor
+comment0.text=\n\ Write\ a\ description\ of\ class\ armor\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=Armor()
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ armor\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment2.params=
+comment2.target=int\ armorIncreaes()
+comment3.params=
+comment3.target=void\ used()
+numComments=4

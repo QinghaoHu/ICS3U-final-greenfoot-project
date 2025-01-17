@@ -19,15 +19,26 @@ public class GunTower extends SuperSmoothMover
         setImage("gunTower.png"); // Set the gun tower image
         getImage().rotate(90);
         armor = 30;
-        maxCoolDown = 120;
-        coolDownBar = new SuperStatBar (maxCoolDown, coolDown, this, 40, 8, -32, Color.GREEN, Color.RED, true, Color.YELLOW, 1); 
-        // getWorld().addObject(coolDownBar, getX(), getY());
+        maxCoolDown = 90;
+        coolDown = 80;
+        coolDownBar = new SuperStatBar (maxCoolDown, coolDown, this, 40, 8, -32, Color.BLUE, Color.RED, true, Color.GRAY, 1); 
     }
+    
+    public void addedToWorld (World w) {
+        w.addObject (coolDownBar, getX(), getY());
+        coolDownBar.update(coolDown);
+    }
+
 
     public void act() {
          if (tankBody == null) {
             getWorld().removeObject(this);
          }
+         
+         if (coolDown > 0) coolDown--;
+         
+         coolDownBar.update(coolDown);
+         
         // Keep the gun tower positioned on the tank body
         setLocation(tankBody.getX(), tankBody.getY());
 
@@ -41,13 +52,22 @@ public class GunTower extends SuperSmoothMover
             turn(difference);
             // setRotation(angle); // Point the gun tower toward the mouse
             if (Greenfoot.mouseClicked(null)) {
-                shootProjectile(angle);
+                if (coolDown == 0 && armor > 0) {
+                    shootProjectile(angle);
+                    coolDown = maxCoolDown;
+                    armor--;
+                }
             }
         }
     }
     
+    public void addArmor(int x) {
+        armor += x;
+        if (armor > 50) armor = 50;
+    }
+    
     private void shootProjectile(int angle) {
-        Projectile projectile = new Projectile(angle); // Create a projectile
+        Projectile projectile = new Projectile(angle, tankBody, this); // Create a projectile
         getWorld().addObject(projectile, getX(), getY());
     }
     

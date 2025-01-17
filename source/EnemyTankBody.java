@@ -13,8 +13,9 @@ public class EnemyTankBody extends SuperSmoothMover
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean isOnRotate;
-    private int rotateDegree, hp;
+    private int rotateDegree, hp, maxHP;
     private EnemyGunTower gunTower;
+    private SuperStatBar hpBar;
     
     public EnemyTankBody() {
         setImage("enemyTankBody.png");
@@ -23,6 +24,13 @@ public class EnemyTankBody extends SuperSmoothMover
         isOnRotate = false;
         rotateDegree = 0;
         hp = 600;
+        maxHP = 600;
+        hpBar = new SuperStatBar (maxHP, hp, this, 40, 8, -32, Color.GREEN, Color.RED, true, Color.YELLOW, 1);
+    }
+    
+     public void addedToWorld (World w) {
+        w.addObject (hpBar, getX(), getY());
+        hpBar.update(hp);
     }
     
     public void setGunTower(EnemyGunTower gunTower) {
@@ -32,6 +40,8 @@ public class EnemyTankBody extends SuperSmoothMover
     public void act(){
         int originalLocationX = getX(), originalLocationY = getY();
         int originalAngle = getRotation();
+        
+        hpBar.update(hp);
         
         if (isOnRotate) {
             turn(1);

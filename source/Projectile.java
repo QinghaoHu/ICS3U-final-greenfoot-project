@@ -9,12 +9,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Projectile extends SuperSmoothMover
 {
     private int angle;
+    private UserTankBody userTankBody;
+    private GunTower userGunTower;
 
     /**
      * Constructor for Projectile.
      * @param angle The angle at which the projectile is launched.
      */
-    public Projectile(int angle) {
+    public Projectile(int angle, UserTankBody userTankBody, GunTower userGunTower) {
         // Create an image of size 16x16 for the projectile
         GreenfootImage image = new GreenfootImage(16, 16);
         
@@ -33,6 +35,9 @@ public class Projectile extends SuperSmoothMover
         getImage().rotate(90);
         this.angle = angle;
         setRotation(angle); 
+        
+        this.userTankBody = userTankBody;
+        this.userGunTower = userGunTower;
     }
     
     /**
@@ -46,10 +51,32 @@ public class Projectile extends SuperSmoothMover
         // Add a trail piece at the current location
         getWorld().addObject(new TrailPiece(getImage(), 20, angle), getX(), getY());
 
-        // Remove the projectile if it reaches the edge of the world
+        // Remove the projectile if it reaches the edge of the world Tank
         EnemyTankBody enemyTank = (EnemyTankBody)getOneIntersectingObject(EnemyTankBody.class);
         if (enemyTank != null) {
             enemyTank.getDamage();
+            Explosion explosion = new Explosion();
+            getWorld().addObject(explosion, getX(), getY());
+            getWorld().removeObject(this);
+            return;
+        }
+        
+        Health health = (Health)getOneIntersectingObject(Health.class);
+        if (health != null) {
+            userTankBody.addHP(health.hpIncrease());
+            Explosion explosion = new Explosion();
+            getWorld().addObject(explosion, getX(), getY());
+            health.used();
+            getWorld().removeObject(this);
+            return;
+        }
+        
+        Armor armor = (Armor)getOneIntersectingObject(Armor.class);
+        if (armor != null) {
+            userGunTower.addArmor(armor.armorIncreaes());
+            Explosion explosion = new Explosion();
+            getWorld().addObject(explosion, getX(), getY());
+            armor.used();
             getWorld().removeObject(this);
             return;
         }

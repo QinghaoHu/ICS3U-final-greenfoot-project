@@ -20,7 +20,7 @@ public class UserTankBody extends SuperSmoothMover {
     public UserTankBody() {
         setImage("userTankBody.png");
         getImage().rotate(90);
-        hp = 1500;
+        hp = 3500;
         tankSoundIndex = 0;
         tankSound = new GreenfootSound[2];
         for (int i = 0; i < 2; i++) {
@@ -86,6 +86,11 @@ public class UserTankBody extends SuperSmoothMover {
     
     public int getHP() {
         return hp; 
+    }
+    
+    public void addHP(int x) {
+        hp += x;
+        if (hp > 3500) hp = 3500;
     }
     
     public void damageMe() {

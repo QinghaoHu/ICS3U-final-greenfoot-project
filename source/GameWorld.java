@@ -16,6 +16,10 @@ public class GameWorld extends World
     private static int score = 0;
     private int frames;
     private long lastTime = System.currentTimeMillis();
+    private Health health;
+    private Armor armor;
+    
+    private int enemyTankSpawnCoolDown, healthSpawnCoolDown, armorSpawnCoolDown;
     
     /**
      * Constructor for objects of class gameWorld.
@@ -25,7 +29,7 @@ public class GameWorld extends World
     {
         super(1000, 750, 1);
         
-        setPaintOrder(Counter.class,  EnemyGunTower.class);
+        setPaintOrder(Counter.class,  EnemyGunTower.class, EnemyTankBody.class);
         
         userTankBody = new UserTankBody();
         addObject(userTankBody, 300, 200);
@@ -37,24 +41,43 @@ public class GameWorld extends World
         
         scoreCounter = new Counter ("Points: ");
         hpCounter = new Counter ("Life: ");
-        armorCounter = new Counter ("Bomb: ");
+        armorCounter = new Counter ("Armor Left: ");
         fpsCounter = new Counter ("FPS: ");
-        addObject(scoreCounter, 960, 32);
-        addObject(hpCounter, 960, 56);
-        addObject(armorCounter, 960, 80);
-        addObject(fpsCounter, 960, 103);
+        addObject(scoreCounter, 940, 32);
+        addObject(hpCounter, 670, 32);
+        addObject(armorCounter, 370, 32);
+        addObject(fpsCounter, 100, 32);
+        
+        enemyTankSpawnCoolDown = 1;
+        healthSpawnCoolDown = 1;
+        armorSpawnCoolDown = 1;
+        
         frames = 0;
     }
     
    public void act() {
+        enemyTankSpawnCoolDown--;
+        healthSpawnCoolDown--;
+        armorSpawnCoolDown--;
+        
         hpCounter.setValue(userTankBody.getHP());
         scoreCounter.setValue(score);
-        
+        armorCounter.setValue(gunTower.getArmor());
         countFPS();
         
-        int spawnOption = Greenfoot.getRandomNumber(100);
-        if (spawnOption == 0) {
+        if (enemyTankSpawnCoolDown == 0) {
             createEnemyTank();
+            enemyTankSpawnCoolDown = 120 + Greenfoot.getRandomNumber(150);
+        }
+        
+        if (healthSpawnCoolDown == 0) {
+            createHealth();
+            healthSpawnCoolDown = 300 + Greenfoot.getRandomNumber(200);
+        }
+        
+        if (armorSpawnCoolDown == 0) {
+            createArmor();
+            armorSpawnCoolDown = 300 + Greenfoot.getRandomNumber(200);
         }
     }
     
@@ -68,6 +91,11 @@ public class GameWorld extends World
         }
     }
     
+    private void createArmor() {
+        armor = new Armor();
+        addObject(armor, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(750));
+    }
+    
     public static void addPoints() {
         score++;
     }
@@ -76,8 +104,14 @@ public class GameWorld extends World
         int y = Greenfoot.getRandomNumber(750);
         enemyTankBody = new EnemyTankBody();
         addObject(enemyTankBody, 700, y);
+        enemyTankBody.addedToWorld(this);
         enemyGunTower = new EnemyGunTower(enemyTankBody, gunTower);
         addObject(enemyGunTower, 700, y);
         enemyTankBody.setGunTower(enemyGunTower);
+    }
+    
+    private void createHealth() {
+        health = new Health();
+        addObject(health, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(750));
     }
 }

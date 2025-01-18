@@ -10,15 +10,16 @@ public class WelcomeWorld extends World
 {
     private Button startButton;
 
-    /**
-     * Constructor for objects of class WelcomeWorld.
-     * 
-     */
-    public WelcomeWorld()
-    {    
+    public WelcomeWorld() {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 750, 1); 
         startButton = new Button("     Start");
         addObject(startButton, 500, 550);
+    }
+    
+    public void act() {
+        if (Greenfoot.mouseClicked(startButton)) {
+            Greenfoot.setWorld(new GameWorld());
+        }
     }
 }

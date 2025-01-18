@@ -19,6 +19,7 @@ public class GameWorld extends World
     private Health health;
     private Armor armor;
     private static int enemySpawnRate;
+    private int speed;
     
     private int enemyTankSpawnCoolDown, healthSpawnCoolDown, armorSpawnCoolDown;
     
@@ -33,8 +34,10 @@ public class GameWorld extends World
         Greenfoot.setSpeed(50);
         
         setPaintOrder(Counter.class,  EnemyGunTower.class, EnemyTankBody.class);
-        
-        userTankBody = new UserTankBody();
+
+        speed = 2;
+
+        userTankBody = new UserTankBody(speed);
         addObject(userTankBody, 300, 200);
         
         gunTower = new GunTower(userTankBody);

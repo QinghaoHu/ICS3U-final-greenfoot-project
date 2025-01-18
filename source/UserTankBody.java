@@ -15,19 +15,21 @@ public class UserTankBody extends SuperSmoothMover {
     private int movingSpeed;
     private int tankSoundIndex;
     private GunTower gunTower;
+    private int speed;
     
     private GreenfootSound[] tankSound;
     
-    public UserTankBody() {
+    public UserTankBody(int speed) {
         setImage("userTankBody.png");
         getImage().rotate(90);
         hp = 3500;
         tankSoundIndex = 0;
         tankSound = new GreenfootSound[2];
-        for (int i = 0; i < 2; i++) {
-            tankSound[i] = new GreenfootSound("tankDriving.wav");
+        this.speed = speed;
+        /** for (int i = 0; i < 2; i++) {
+            //tankSound[i] = new GreenfootSound("tankDriving.wav");
             tankSound[i].setVolume(50);
-        }
+        } **/
     }
     
     public void act(){
@@ -40,10 +42,10 @@ public class UserTankBody extends SuperSmoothMover {
         int originalAngle = getRotation();
         
         if (Greenfoot.isKeyDown("w")) {
-            move(2); // Move forward
+            move(speed); // Move forward
             isMove = true;
         } else if (Greenfoot.isKeyDown("s")) {
-            move(-2); // Move backward
+            move(-speed); // Move backward
             isMove = true;
         }
         // Rotate the tank body with left/right arrow keys (optional)
@@ -56,10 +58,10 @@ public class UserTankBody extends SuperSmoothMover {
         }
         
         if (Greenfoot.isKeyDown("up")) {
-            move(2); // Move forward
+            move(speed); // Move forward
             isMove = true;
         } else if (Greenfoot.isKeyDown("down")) {
-            move(-2); // Move backward
+            move(-speed); // Move backward
             isMove = true;
         }
 
@@ -91,10 +93,6 @@ public class UserTankBody extends SuperSmoothMover {
         if (armor != null) {
             gunTower.addArmor(armor.armorIncreaes());
             armor.used();
-        }
-        
-        if (isMove) {
-            playSound();
         }
     }
     

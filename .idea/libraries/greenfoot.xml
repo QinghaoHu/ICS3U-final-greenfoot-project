@@ -2,6 +2,7 @@
   <library name="greenfoot">
     <CLASSES>
       <root url="jar:///var/lib/snapd/snap/greenfoot/249/usr/share/greenfoot/greenfoot.jar!/" />
+      <root url="jar:///Applications/Greenfoot.app/Contents/Java/greenfoot.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

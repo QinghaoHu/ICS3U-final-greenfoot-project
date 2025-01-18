@@ -12,6 +12,9 @@ public class Projectile extends SuperSmoothMover
     private UserTankBody userTankBody;
     private GunTower userGunTower;
 
+    private static final Color niceRed = new Color (204, 0, 0);
+    private static final Color niceYellow = new Color (255, 215, 0);
+
     /**
      * Constructor for Projectile.
      * @param angle The angle at which the projectile is launched.
@@ -21,11 +24,11 @@ public class Projectile extends SuperSmoothMover
         GreenfootImage image = new GreenfootImage(16, 16);
         
         // Draw the bullet body (main rectangle)
-        image.setColor(Color.GRAY); // Set the color for the rectangle
+        image.setColor(niceYellow); // Set the color for the rectangle
         image.fillRect(6, 10, 4, 6); // Rectangle dimensions (x, y, width, height)
 
         // Draw triangular tip of the bullet
-        image.setColor(Color.RED); // Set the color for the triangle
+        image.setColor(niceRed); // Set the color for the triangle
         int[] xPoints = {6, 10, 8}; // X-coordinates of triangle vertices
         int[] yPoints = {10, 10, 6}; // Y-coordinates of triangle vertices
         image.fillPolygon(xPoints, yPoints, 3); // Draw the triangle

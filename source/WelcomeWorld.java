@@ -19,7 +19,7 @@ public class WelcomeWorld extends World
     
     public void act() {
         if (Greenfoot.mouseClicked(startButton)) {
-            Greenfoot.setWorld(new GameWorld());
+            Greenfoot.setWorld(new InformationWorld());
         }
     }
 }

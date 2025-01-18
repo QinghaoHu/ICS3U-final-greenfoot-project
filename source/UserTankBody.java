@@ -121,6 +121,10 @@ public class UserTankBody extends SuperSmoothMover {
         int damage = Greenfoot.getRandomNumber(100) + 400;
         hp -= damage;
         // End the game if HP = 0
+        hp = Math.max(hp, 0);
+        if (hp == 0) {
+            Greenfoot.setWorld(new EndGameWorld());
+        }
     }
     
     private void playSound() {
